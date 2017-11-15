@@ -1,6 +1,7 @@
 const request = require('request');
 
 request({
+
     url: 'https://maps.googleapis.com/maps/api/geocode/json?address=1301%20lombard%20street%20philadelphia&key=AIzaSyCr1ZuxSwJSUiJV37KacSg3uJ4eLv38tXY',
     json: true //basically saying, hey if you can send back JSON that would be cool
 }, (error, response, body)=> {
@@ -13,3 +14,4 @@ request({
     console.log(`Lng: ${body.results[0].geometry.location.lng}`);
     
 });
+
