@@ -1,4 +1,5 @@
 const request = require('request');
+const yargs = require('yargs');
 
 request({
 
@@ -10,8 +11,8 @@ request({
     //console.log(response.body);
     //console.log(error);
     console.log(`Address: ${body.results[0].formatted_address}`);
-    console.log(`Lat: ${body.results[0].geometry.location.lat}`);
-    console.log(`Lng: ${body.results[0].geometry.location.lng}`);
+    console.log(`Latitude: ${body.results[0].geometry.location.lat}`);
+    console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
     
 });
 
