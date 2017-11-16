@@ -1,6 +1,6 @@
 const request = require('request');
 
-var geocodeAddress = (addresss) => { 
+var geocodeAddress = (addresss, callback) => { 
     var encodedAddress = encodeURIComponent(addresss);
     request({
         url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=AIzaSyCr1ZuxSwJSUiJV37KacSg3uJ4eLv38tXY`,
@@ -11,13 +11,21 @@ var geocodeAddress = (addresss) => {
         //console.log(response.body);
         //console.log(error);
         if(error) {
-            console.log('Unable to connect to Google Servers.');
+            callback('Unable to connect to Google Servers.');
         } else if(body.status === "ZERO_RESULTS") {  
-            console.log('Unable to find that address');
+            callback('Unable to find that address');
         } else if(body.status === "OK") {
-            console.log(`Address: ${body.results[0].formatted_address}`);
-            console.log(`Latitude: ${body.results[0].geometry.location.lat}`);
-            console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
+            //we pass undefined, because there are no errors
+            callback(undefined, {
+                results: {
+                    address: body.results[0].formatted_address, 
+                    latitude: body.results[0].geometry.location.lat,
+                    longitude: body.results[0].geometry.location.lng
+                }
+            })
+            // console.log(`Address: ${body.results[0].formatted_address}`);
+            // console.log(`Latitude: ${body.results[0].geometry.location.lat}`);
+            // console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
         }  
     });
 }
