@@ -10,7 +10,7 @@ const argv = yargs
             string: true
         }
     })
-    .help()
+    .help('Format address by wrapping it with quotes')
     .alias('help', 'h')
     .argv;
 
@@ -25,9 +25,16 @@ request({
     //console.log(JSON.stringify(body.results[0].geometry, undefined, 2));
     //console.log(response.body);
     //console.log(error);
-    console.log(`Address: ${body.results[0].formatted_address}`);
-    console.log(`Latitude: ${body.results[0].geometry.location.lat}`);
-    console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
+    if(error) {
+        console.log('Unable to connect to Google Servers.');
+    } else if(body.status === "ZERO_RESULTS") {  
+        console.log('Unable to find that address');
+    } else if(body.status === "OK") {
+        console.log(`Address: ${body.results[0].formatted_address}`);
+        console.log(`Latitude: ${body.results[0].geometry.location.lat}`);
+        console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
+    }
+    
     
 });
 
