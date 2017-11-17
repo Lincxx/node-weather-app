@@ -16,23 +16,23 @@ const argv = yargs
     .argv;
 
                                 //our callback will have either an errorMsg or a result
-// geocode.geocodeAddress(argv.a, (errorMessage, results) => {
-//     if(errorMessage) {
-//         console.log(errorMessage);
-//     } else {
-//         console.log(JSON.stringify(results, undefined, 2));
-//     }
-// });
-
-//lat, lng, callback
-weather.getWeather(36.170584, -82.3912, (errorMessage, weatherResults) => {
-    
+geocode.geocodeAddress(argv.a, (errorMessage, results) => {
     if(errorMessage) {
-        console.log(errorMessage)
+        console.log(errorMessage);
     } else {
-        console.log(JSON.stringify(weatherResults, undefined, 2));
+        //lat, lng, callback
+        console.log(results.address);
+        weather.getWeather(results.latitude, results.longitude, (errorMessage, weatherResults) => {
+            if(errorMessage) {
+                console.log(errorMessage)
+            } else {
+                console.log(`It's currently ${weatherResults.temperature}, but it feels like ${weatherResults.apparentTemperature} `)
+            }
+        });
     }
 });
+
+
 
 
 

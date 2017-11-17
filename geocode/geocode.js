@@ -17,11 +17,11 @@ var geocodeAddress = (addresss, callback) => {
         } else if(body.status === "OK") {
             //we pass undefined, because there are no errors
             callback(undefined, {
-                results: {
+                
                     address: body.results[0].formatted_address, 
                     latitude: body.results[0].geometry.location.lat,
                     longitude: body.results[0].geometry.location.lng
-                }
+                
             })
             // console.log(`Address: ${body.results[0].formatted_address}`);
             // console.log(`Latitude: ${body.results[0].geometry.location.lat}`);

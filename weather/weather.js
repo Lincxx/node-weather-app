@@ -1,6 +1,5 @@
 const request = require('request');
 const env = require('dotenv').config();
-
 const api = process.env.API_KEY;
 
 var getWeather = (lat, lng, callback) => {
@@ -10,7 +9,11 @@ var getWeather = (lat, lng, callback) => {
     }, (error, response, body)=> {
         if(!error && response.statusCode === 200){
             console.log(body.currently.temperature);
-            callback(undefined, `It's currently ${body.currently.temperature} outside, but feels like ${body.currently.apparentTemperature}`);
+            //there is no error, so the first arg is undefined
+            callback(undefined, {
+                temperature : body.currently.temperature,
+                apparentTemperature: body.currently.apparentTemperature
+            });
         } else {
             callback('Unable to fetch weather');
         }
