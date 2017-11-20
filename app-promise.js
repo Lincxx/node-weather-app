@@ -14,3 +14,5 @@ const argv = yargs
     .help('Format address by wrapping it with quotes')
     .alias('help', 'h')
     .argv;
+
+var encodedAddress = encodeURIComponent(address);
