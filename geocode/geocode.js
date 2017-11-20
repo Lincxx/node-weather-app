@@ -1,7 +1,7 @@
 const request = require('request');
 
-var geocodeAddress = (addresss, callback) => { 
-    var encodedAddress = encodeURIComponent(addresss);
+var geocodeAddress = (address, callback) => { 
+    var encodedAddress = encodeURIComponent(address);
     request({
         url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=AIzaSyCr1ZuxSwJSUiJV37KacSg3uJ4eLv38tXY`,
         json: true //basically saying, hey if you can send back JSON that would be cool
